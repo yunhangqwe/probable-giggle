@@ -227,11 +227,38 @@
     document.querySelectorAll('[data-close-map]').forEach(control=>control.addEventListener('click',closeMapSheet));
     window.addEventListener('keydown',event=>{if(event.key==='Escape')closeMapSheet()});
     document.querySelectorAll('.check').forEach(box=>{box.checked=localStorage.getItem(box.dataset.key)==='1';box.addEventListener('change',()=>localStorage.setItem(box.dataset.key,box.checked?'1':'0'))});
-    const dayButtons=[...document.querySelectorAll('.day-nav button')];
-    const setActiveDay=id=>dayButtons.forEach(button=>{const active=button.dataset.target===id;button.classList.toggle('is-active',active);button.setAttribute('aria-current',active?'page':'false');if(active)button.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'})});
-    dayButtons.forEach(button=>button.addEventListener('click',()=>{setActiveDay(button.dataset.target);document.getElementById(button.dataset.target).scrollIntoView({behavior:'smooth',block:'start'})}));
-    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)setActiveDay(entry.target.id)}),{rootMargin:'-24% 0px -62% 0px'});
-    document.querySelectorAll('.day').forEach(day=>observer.observe(day));
+const dayButtons=[...document.querySelectorAll('.day-nav button')];
+const daySections=dayButtons.map(button=>document.getElementById(button.dataset.target)).filter(Boolean);
+const dayNav=document.querySelector('.day-nav');
+let requestedDayId=null;
+let scrollFrame=0;
+let releaseTimer=0;
+const setActiveDay=id=>dayButtons.forEach(button=>{const active=button.dataset.target===id;button.classList.toggle('is-active',active);button.setAttribute('aria-current',active?'page':'false');if(active)button.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'})});
+const syncDayFromScroll=()=>{
+  if(requestedDayId)return;
+  const threshold=(dayNav?.getBoundingClientRect().height||0)+26;
+  let activeId=daySections[0]?.id;
+  daySections.forEach(section=>{if(section.getBoundingClientRect().top<=threshold)activeId=section.id});
+  if(activeId)setActiveDay(activeId);
+};
+const releaseRequestedDay=()=>{
+  if(!requestedDayId)return;
+  requestedDayId=null;
+  syncDayFromScroll();
+};
+const requestDay=id=>{
+  requestedDayId=id;
+  setActiveDay(id);
+  window.clearTimeout(releaseTimer);
+  document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
+  releaseTimer=window.setTimeout(releaseRequestedDay,950);
+};
+dayButtons.forEach(button=>button.addEventListener('click',()=>requestDay(button.dataset.target)));
+window.addEventListener('scroll',()=>{
+  if(!scrollFrame)scrollFrame=requestAnimationFrame(()=>{scrollFrame=0;syncDayFromScroll()});
+},{passive:true});
+window.addEventListener('scrollend',releaseRequestedDay,{passive:true});
+syncDayFromScroll();
     const backTop=document.getElementById('backTop');
     window.addEventListener('scroll',()=>backTop.classList.toggle('is-visible',window.scrollY>620),{passive:true});
     backTop.classList.toggle('is-visible',window.scrollY>620);
