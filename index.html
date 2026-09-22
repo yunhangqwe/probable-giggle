@@ -81,6 +81,7 @@
   .location-detail{display:block;margin-top:5px;color:#877868;font-size:11px;line-height:1.55}.spot .location-detail{margin:0 0 7px}.meal .location-detail{margin-left:0}
   .day-nav .nav-short{display:none}
   .experience-plan{margin:23px 0 4px;border:1px solid var(--line);background:#fcfaf6}.experience-plan summary{padding:15px 16px;color:#43342c;font-size:16px;font-weight:700;cursor:pointer}.experience-plan[open] summary{border-bottom:1px solid var(--line)}.experience-body{padding:16px}.experience-intro{margin:0 0 15px;color:#756d65;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;font-size:12px;line-height:1.7}.experience-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.experience-card{padding:14px 13px;background:#fffdf9;border-top:2px solid var(--accent)}.experience-card h4{margin:0;color:#241f1b;font-size:15px}.experience-card .experience-type{margin:4px 0 10px;color:var(--accent);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;font-size:11px;font-weight:650}.experience-card p{margin:6px 0;color:#6e665e;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;font-size:11px;line-height:1.6}.experience-card b{color:#38312b}.experience-card .actions{margin-top:11px}.experience-card .map,.experience-card .copy{font-size:10px;padding:0 7px}.experience-flow{margin:16px 0 0;padding:12px 13px;background:#f5f0e9;border-left:3px solid var(--accent);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;font-size:12px;line-height:1.75;color:#504942}.experience-flow strong{color:#8e3028}.experience-note{margin:10px 0 0;color:#82786e;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;font-size:11px;line-height:1.65}@media(max-width:560px){.experience-cards{grid-template-columns:1fr}.experience-card{padding:13px}.experience-card p{font-size:12px}.experience-plan summary{font-size:15px}.experience-body{padding:14px}.cover-journey-mark{display:none}.cover-title-main{display:block}.cover-title h1{font-size:50px;letter-spacing:-.09em}.cover-title{padding-bottom:20px}.day-top .steps{position:static;display:inline-flex;margin-top:12px}.day-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;overflow:visible;padding:9px 8px}.day-nav button{min-width:0;padding:8px 2px;font-size:11px;text-align:center;white-space:nowrap}.day-nav .nav-full{display:none}.day-nav .nav-short{display:inline}}
+  .map-sheet-heading{margin-bottom:5px}.map-sheet-destination{margin:0 0 12px;padding:9px 11px;border-left:3px solid var(--accent);background:#f8f3eb;color:#574d45;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;font-size:12px;line-height:1.45}.departure-checklist{margin:17px 0 20px;padding:14px 15px;border:1px solid #e5ddd2;background:#fbf8f2}.departure-checklist h3{margin:0 0 9px;color:#49372c;font-family:"Songti SC","STSong",serif;font-size:16px}.departure-checklist p{margin:0 0 8px;color:#8b7568;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;font-size:11px}.departure-checklist label{display:flex;gap:8px;align-items:flex-start;margin:8px 0;color:#504942;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;font-size:12px;line-height:1.5}.departure-checklist input{margin-top:3px;accent-color:var(--accent)}.route-links{align-items:flex-start}.route-links .next-stop{display:inline-flex;align-items:center;min-height:40px;padding:0 13px;border:0;background:var(--accent);color:#fff;font-weight:700}.route-more{margin:8px 0 0}.route-more summary{color:#826d61;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;font-size:12px;cursor:pointer}.route-more .route-all-stops{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.route-more .route-all-stops a{font-size:11px}.route-more .route-all-stops .arrow{align-self:center}@media(max-width:560px){.day-top .steps{display:none}#day4 h2{font-size:30px;letter-spacing:-.08em;white-space:nowrap}.departure-checklist{margin-top:15px;padding:13px 14px}.route-links .next-stop{width:100%;justify-content:center;font-size:13px}.route-more{width:100%}.map-sheet-destination{font-size:12px}}
 </style>
 </head>
 <body>
@@ -93,7 +94,7 @@
     <nav class="day-nav" aria-label="按天跳转"><button class="is-active" aria-current="page" data-target="day1" aria-label="D1 初到南昌">D1 <span class="nav-full">初到南昌</span><span class="nav-short">初到</span></button><button data-target="day2" aria-label="D2 南昌漫游">D2 <span class="nav-full">南昌漫游</span><span class="nav-short">漫游</span></button><button data-target="day3" aria-label="D3 抵达瓷都">D3 <span class="nav-full">抵达瓷都</span><span class="nav-short">瓷都</span></button><button data-target="day4" aria-label="D4 陶艺体验">D4 <span class="nav-full">陶艺体验</span><span class="nav-short">陶艺</span></button><button data-target="day5" aria-label="D5 返程回家">D5 <span class="nav-full">返程回家</span><span class="nav-short">返程</span></button></nav>
     <main>
       <section class="day" id="day1">
-        <div class="day-top"><div><h2>Day 1｜抵达南昌</h2><p class="date">10.1 · 广州新塘 → 南昌南 · 珠宝街 + 万寿宫夜景</p></div><span class="steps">≤ 5000 步</span></div>
+        <div class="day-top"><div><h2>Day 1｜抵达南昌</h2><p class="date">10.1 · 广州新塘 → 南昌南 · 珠宝街 + 万寿宫夜景</p></div></div>
         <div class="optional"><strong>🚄 去程高铁 · G3074</strong><br>10.1 周四 · 广州新塘 12:50 → 南昌南 17:38 · 历时 4小时48分</div>
         <div class="route"><div class="route-title">🧭 当天路线 · 住宿：富润大厦（桂殿路666号）</div><div class="route-links"><a href="https://maps.apple.com/?saddr=28.5000,115.9500&daddr=%E5%AF%8C%E6%B6%A6%E5%A4%A7%E5%8E%A6%20%E8%A5%BF%E6%B9%96%E5%8C%BA%E6%A1%82%E6%AE%BF%E8%B7%AF666%E5%8F%B7%20%E5%8D%97%E6%98%8C&dirflg=d">南昌南站 → 富润大厦</a><span class="arrow">→</span><a href="https://maps.apple.com/?saddr=%E5%AF%8C%E6%B6%A6%E5%A4%A7%E5%8E%A6%20%E8%A5%BF%E6%B9%96%E5%8C%BA%E6%A1%82%E6%AE%BF%E8%B7%AF666%E5%8F%B7%20%E5%8D%97%E6%98%8C&daddr=28.6729,115.8887&dirflg=d">富润大厦 → 珠宝街</a><span class="arrow">→</span><a href="https://maps.apple.com/?saddr=28.6729,115.8887&daddr=28.6743,115.8856&dirflg=w">珠宝街 → 万寿宫</a><span class="arrow">→</span><a href="https://maps.apple.com/?saddr=28.6743,115.8856&daddr=%E5%AF%8C%E6%B6%A6%E5%A4%A7%E5%8E%A6%20%E8%A5%BF%E6%B9%96%E5%8C%BA%E6%A1%82%E6%AE%BF%E8%B7%AF666%E5%8F%B7%20%E5%8D%97%E6%98%8C&dirflg=d">万寿宫 → 富润大厦</a></div></div>
         <ul class="schedule"><li><time>12:50</time>G3074 从广州新塘出发 → 南昌南</li><li><time>17:38</time>抵达南昌南站 → 富润大厦（桂殿路666号）办理入住、休息</li><li><time>19:30</time>从富润大厦出发，珠宝街晚餐</li><li><time>20:40</time>万寿宫散步拍夜景后回富润大厦</li></ul>
@@ -106,7 +107,7 @@
       </section>
 
       <section class="day" id="day2">
-        <div class="day-top"><div><h2>Day 2｜南昌平路慢逛</h2><p class="date">10.2 · 八一广场 + 滕王阁 + 绳金塔</p></div><span class="steps">≤ 10000 步</span></div>
+        <div class="day-top"><div><h2>Day 2｜南昌平路慢逛</h2><p class="date">10.2 · 八一广场 + 滕王阁 + 绳金塔</p></div></div>
         <div class="route"><div class="route-title">🧭 当天路线 · 起止：富润大厦（桂殿路666号）</div><div class="route-links"><a href="https://maps.apple.com/?saddr=%E5%AF%8C%E6%B6%A6%E5%A4%A7%E5%8E%A6%20%E8%A5%BF%E6%B9%96%E5%8C%BA%E6%A1%82%E6%AE%BF%E8%B7%AF666%E5%8F%B7%20%E5%8D%97%E6%98%8C&daddr=28.6734,115.9045&dirflg=d">富润大厦 → 八一广场</a><span class="arrow">→</span><a href="https://maps.apple.com/?saddr=28.6734,115.9045&daddr=28.6739,115.9026&dirflg=w">八一广场 → 美术馆</a><span class="arrow">→</span><a href="https://maps.apple.com/?saddr=28.6739,115.9026&daddr=28.6815,115.8811&dirflg=d">美术馆 → 滕王阁</a><span class="arrow">→</span><a href="https://maps.apple.com/?saddr=28.6815,115.8811&daddr=28.6591,115.9009&dirflg=d">滕王阁 → 绳金塔</a><span class="arrow">→</span><a href="https://maps.apple.com/?saddr=28.6591,115.9009&daddr=%E5%AF%8C%E6%B6%A6%E5%A4%A7%E5%8E%A6%20%E8%A5%BF%E6%B9%96%E5%8C%BA%E6%A1%82%E6%AE%BF%E8%B7%AF666%E5%8F%B7%20%E5%8D%97%E6%98%8C&dirflg=d">绳金塔 → 富润大厦</a></div></div>
         <ul class="schedule"><li><time>10:00</time>从富润大厦出发，八一广场 + 江西省美术馆</li><li><time>14:00</time>回富润大厦午休</li><li><time>16:00</time>滕王阁底部拍照</li><li><time>18:00</time>绳金塔晚餐后回富润大厦</li></ul>
         <h3 class="spot-title">📷 打卡点</h3>
@@ -122,7 +123,7 @@
       </section>
 
       <section class="day" id="day3">
-        <div class="day-top"><div><h2>Day 3｜转场景德镇</h2><p class="date">10.3 · 南昌东 → 景德镇北 · 陶阳里 + 陶溪川</p></div><span class="steps">≤ 8000 步</span></div>
+        <div class="day-top"><div><h2>Day 3｜转场景德镇</h2><p class="date">10.3 · 南昌东 → 景德镇北 · 陶阳里 + 陶溪川</p></div></div>
         <div class="optional"><strong>🚄 转场高铁 · G5118</strong><br>10.3 周六 · 南昌东 09:58 → 景德镇北 10:40 · 历时 42分</div>
         <div class="route"><div class="route-title">🧭 当天路线 · 住宿：中华南路488号</div><div class="route-links"><a href="https://maps.apple.com/?saddr=29.3388,117.2423&daddr=%E6%99%AF%E5%BE%B7%E9%95%87%E5%B8%82%E7%8F%A0%E5%B1%B1%E5%8C%BA%E4%B8%AD%E5%8D%8E%E5%8D%97%E8%B7%AF488%E5%8F%B7&dirflg=d">景德镇北站 → 中华南路488号</a><span class="arrow">→</span><a href="https://maps.apple.com/?saddr=%E6%99%AF%E5%BE%B7%E9%95%87%E5%B8%82%E7%8F%A0%E5%B1%B1%E5%8C%BA%E4%B8%AD%E5%8D%8E%E5%8D%97%E8%B7%AF488%E5%8F%B7&daddr=29.2964,117.2081&dirflg=d">中华南路488号 → 陶阳里</a><span class="arrow">→</span><a href="https://maps.apple.com/?saddr=29.2964,117.2081&daddr=29.2956,117.2358&dirflg=d">陶阳里 → 陶溪川</a><span class="arrow">→</span><a href="https://maps.apple.com/?saddr=29.2956,117.2358&daddr=%E6%99%AF%E5%BE%B7%E9%95%87%E5%B8%82%E7%8F%A0%E5%B1%B1%E5%8C%BA%E4%B8%AD%E5%8D%8E%E5%8D%97%E8%B7%AF488%E5%8F%B7&dirflg=d">陶溪川 → 中华南路488号</a></div></div>
         <ul class="schedule"><li><time>09:58</time>G5118 从南昌东出发 → 景德镇北</li><li><time>10:40</time>抵达景德镇北 → 中华南路488号办理入住、休息</li><li><time>14:00</time>从中华南路488号出发，陶阳里慢逛</li><li><time>16:00</time>回中华南路488号二次午休</li><li><time>18:00</time>陶溪川市集 + 夜景后回住宿</li></ul>
@@ -138,7 +139,7 @@
       </section>
 
       <section class="day" id="day4">
-        <div class="day-top"><div><h2>Day 4｜陶艺体验日</h2><p class="date">10.4 · 雕塑瓷厂为主，三宝蓬为备选</p></div><span class="steps">≤ 8000 步</span></div>
+        <div class="day-top"><div><h2>Day 4｜陶艺体验日</h2><p class="date">10.4 · 雕塑瓷厂为主，三宝蓬为备选</p></div></div>
         <div class="route"><div class="route-title">🧭 当天路线 · 起止：中华南路488号</div><div class="route-links"><a href="https://maps.apple.com/?saddr=%E6%99%AF%E5%BE%B7%E9%95%87%E5%B8%82%E7%8F%A0%E5%B1%B1%E5%8C%BA%E4%B8%AD%E5%8D%8E%E5%8D%97%E8%B7%AF488%E5%8F%B7&daddr=29.2999,117.2540&dirflg=d">中华南路488号 → 雕塑瓷厂</a><span class="arrow">→</span><a href="https://maps.apple.com/?saddr=29.2999,117.2540&daddr=29.2857,117.2141&dirflg=d">雕塑瓷厂 → 七中小肉</a><span class="arrow">→</span><a href="https://maps.apple.com/?saddr=29.2857,117.2141&daddr=29.2999,117.2540&dirflg=d">七中小肉 → 雕塑瓷厂</a><span class="arrow">→</span><a href="https://maps.apple.com/?saddr=29.2999,117.2540&daddr=29.2899,117.2101&dirflg=d">雕塑瓷厂 → 谭婆饺子粑</a><span class="arrow">→</span><a href="https://maps.apple.com/?saddr=29.2899,117.2101&daddr=%E6%99%AF%E5%BE%B7%E9%95%87%E5%B8%82%E7%8F%A0%E5%B1%B1%E5%8C%BA%E4%B8%AD%E5%8D%8E%E5%8D%97%E8%B7%AF488%E5%8F%B7&dirflg=d">谭婆 → 中华南路488号</a></div></div>
         <ul class="schedule"><li><time>10:30</time>从中华南路488号到雕塑瓷厂，慢逛与拍照</li><li><time>11:00</time>光合宇宙拉坯体验，预留约 1 小时</li><li><time>12:15</time>器晤手作画瓷，按现场节奏预留 1–1.5 小时</li><li><time>14:30</time>七中小肉午餐；多友陶艺作为下午备选</li><li><time>19:00</time>饺子粑 + 冷粉后回中华南路488号</li></ul>
         <div class="optional"><strong>三宝蓬为替换方案：</strong>体力充足时，才以三宝蓬替换雕塑瓷厂上午；两处不要同天叠加。</div>
@@ -187,6 +188,7 @@
     <section class="map-sheet-panel" role="dialog" aria-modal="true" aria-labelledby="mapSheetTitle">
       <div class="map-sheet-handle"></div>
       <div class="map-sheet-heading"><p id="mapSheetTitle">选择导航方式</p><button type="button" class="map-sheet-close" data-close-map aria-label="关闭">×</button></div>
+      <p class="map-sheet-destination" id="mapSheetDestination" aria-live="polite">将前往：—</p>
       <a class="map-provider amap-provider" id="amapLink" target="_blank" rel="noopener"><span class="provider-mark">高</span><span><strong>高德地图</strong><small>优先在 App 中打开</small></span><b>›</b></a>
       <a class="map-provider apple-provider" id="appleMapLink"><span class="provider-mark">⌖</span><span><strong>苹果地图</strong><small>使用系统地图导航</small></span><b>›</b></a>
     </section>
@@ -198,6 +200,7 @@
     const toast=document.getElementById('toast');
     document.querySelectorAll('.copy').forEach(button=>button.addEventListener('click',async()=>{const text=button.dataset.dest;try{await navigator.clipboard.writeText(text)}catch(e){const area=document.createElement('textarea');area.value=text;document.body.appendChild(area);area.select();document.execCommand('copy');area.remove()}toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1800)}));
     const mapSheet=document.getElementById('mapSheet');
+    const mapSheetDestination=document.getElementById('mapSheetDestination');
     const appleMapLink=document.getElementById('appleMapLink');
     const amapLink=document.getElementById('amapLink');
     const destinationAliases=[[/富润大厦/,'富润大厦，南昌市西湖区桂殿路666号'],[/中华南路488号/,'景德镇市珠山区中华南路488号'],[/陶阳里|龙珠阁/,'陶阳里历史文化旅游区，景德镇市珠山区珠山中路187号'],[/陶溪川/,'陶溪川文创街区，景德镇市珠山区新厂西路150号'],[/雕塑瓷厂/,'景德镇雕塑瓷厂，景德镇市珠山区新厂东路139号'],[/七中小肉/,'七中小肉，景德镇市珠山区浙江路'],[/谭婆/,'谭婆饺子粑，景德镇市珠山区'],[/三宝蓬/,'三宝蓬艺术聚落，景德镇市珠山区竟成镇三宝路'],[/瑶里/,'瑶里古镇，景德镇市浮梁县瑶里镇'],[/景德镇北/,'景德镇北站，景德镇市'],[/南昌南/,'南昌南站，南昌市'],[/南昌东/,'南昌东站，南昌市'],[/南昌西/,'南昌西站，南昌市'],[/珠宝街/,'珠宝街，南昌市西湖区'],[/万寿宫/,'万寿宫历史文化街区，南昌市西湖区'],[/八一广场/,'八一广场，南昌市东湖区'],[/江西省美术馆/,'江西省美术馆，南昌市东湖区'],[/滕王阁/,'滕王阁，南昌市东湖区'],[/绳金塔/,'绳金塔历史文化街区，南昌市西湖区']];
@@ -226,7 +229,7 @@
     const destinationFromLink=link=>{try{const url=new URL(link.href);const copied=link.dataset.destination||link.closest('.spot')?.querySelector('.copy')?.dataset.dest;const lastLabel=(link.textContent||'').split('→').pop().trim();const raw=copied||lastLabel||url.searchParams.get('q')||url.searchParams.get('daddr')||url.searchParams.get('ll')||'';return destinationAliases.find(([matcher])=>matcher.test(raw))?.[1]||raw}catch{return ''}};
     const closeMapSheet=()=>{mapSheet.classList.remove('is-open');mapSheet.setAttribute('aria-hidden','true');document.body.classList.remove('map-sheet-open')};
     const amapUrlFor=destination=>{const match=amapSearchAliases.find(([matcher])=>matcher.test(destination));const {keyword,city}=match?.[1]||{keyword:destination,city:''};return `https://uri.amap.com/search?keyword=${encodeURIComponent(keyword)}${city?`&city=${encodeURIComponent(city)}`:''}&callnative=1`};
-    const openMapChoice=(link,event)=>{event.preventDefault();const destination=destinationFromLink(link);appleMapLink.href=`https://maps.apple.com/?q=${encodeURIComponent(destination)}`;amapLink.href=amapUrlFor(destination);mapSheet.classList.add('is-open');mapSheet.setAttribute('aria-hidden','false');document.body.classList.add('map-sheet-open')};
+    const openMapChoice=(link,event)=>{event.preventDefault();const destination=destinationFromLink(link);mapSheetDestination.textContent=`将前往：${destination||'所选地点'}`;appleMapLink.href=`https://maps.apple.com/?q=${encodeURIComponent(destination)}`;amapLink.href=amapUrlFor(destination);mapSheet.classList.add('is-open');mapSheet.setAttribute('aria-hidden','false');document.body.classList.add('map-sheet-open')};
     const bindNavigation=links=>links.forEach(link=>{if(link.dataset.navigationBound)return;link.dataset.navigationBound='1';if(link.classList.contains('map')){link.textContent='地图导航';link.setAttribute('aria-label','选择地图导航方式')}link.addEventListener('click',event=>openMapChoice(link,event))});
     bindNavigation(document.querySelectorAll('.map,.route-links a,.meal a'));
     const spotDetails={
@@ -262,6 +265,17 @@
     const extraMeals={day3:[['午餐 C｜图味美小黄鱼','图味美小黄鱼，景德镇市珠山区陶溪川文创街区','📍 珠山区陶溪川文创街区内 · 国庆建议提前线上取号'],['晚餐 C｜欧记大排档','欧记大排档，景德镇市珠山区陶溪川文创街区','📍 珠山区陶溪川文创街区内 · 与周边备选步行可达']],day4:[['早餐 B｜诚信油条','诚信油条，景德镇市珠山区中华南路','📍 珠山区中华南路 · 从住宿步行可达'],['午餐 C｜绿川面馆','绿川面馆，景德镇市珠山区雕塑瓷厂','📍 珠山区雕塑瓷厂附近 · 园区周边步行可达'],['晚餐 B｜眼镜粑店','眼镜粑店，景德镇市珠山区陶溪川','📍 珠山区陶溪川对面 · 从雕塑瓷厂打车约 5 分钟'],['晚餐 C｜彭俊林粑店','彭俊林粑店，景德镇市珠山区陶溪川','📍 珠山区陶溪川旁 · 从雕塑瓷厂打车约 5 分钟']],day5:[['瑶里午餐 B｜一步岭土鸡土家菜','一步岭土鸡土家菜，景德镇市浮梁县瑶里古镇红军桥','📍 浮梁县瑶里古镇红军桥旁 · 到瑶里后步行可达']]};
     Object.entries(extraMeals).forEach(([dayId,items])=>{const list=document.querySelector(`#${dayId} .meal`);if(!list)return;items.forEach(([label,destination,detail])=>{const li=document.createElement('li');const anchor=document.createElement('a');anchor.href=`https://maps.apple.com/?q=${encodeURIComponent(destination)}`;anchor.dataset.destination=destination;anchor.textContent=label;const note=document.createElement('small');note.className='location-detail';note.textContent=detail;li.append(anchor,note);list.append(li)})});
     bindNavigation(document.querySelectorAll('.meal a'));
+    document.querySelectorAll('.steps').forEach(node=>node.remove());
+    document.querySelectorAll('.expand .checklist').forEach(node=>node.remove());
+    const departureTasks={
+      day1:['确认入住信息与晚餐是否需要取号','出发前保存万寿宫与珠宝街地图','高铁上准备充电线与饮水'],
+      day2:['确认滕王阁开放时间与入园安排','午休前确定晚餐备选餐厅','出发前保存八一广场与绳金塔地图'],
+      day3:['提前 40 分钟抵达南昌东站','确认景德镇住宿办理入住时间','16:30 前确认陶溪川晚餐线上取号'],
+      day4:['先私信确认器晤手作与光合宇宙档期','确认午餐或晚餐备选餐厅营业','出发前保存雕塑瓷厂园区地图'],
+      day5:['退房前检查证件、充电器与随身物品','07:40 前抵达景德镇北站','确认南昌西站换乘与检票时间']
+    };
+    Object.entries(departureTasks).forEach(([dayId,tasks])=>{const day=document.getElementById(dayId);const route=day?.querySelector('.route');if(!route)return;const panel=document.createElement('section');panel.className='departure-checklist';panel.setAttribute('aria-label','出发前清单');panel.innerHTML='<h3>出发前清单</h3><p>餐饮、预约与路线，出门前逐项确认。</p>';tasks.forEach((task,index)=>{const label=document.createElement('label');const input=document.createElement('input');input.type='checkbox';input.className='check';input.dataset.key=`prep-${dayId}-${index}`;label.append(input,document.createTextNode(task));panel.append(label)});route.after(panel)});
+    document.querySelectorAll('.route-links').forEach(routeLinks=>{const primary=routeLinks.querySelector('a');if(!primary)return;const rest=[...routeLinks.childNodes].filter(node=>node!==primary);if(!rest.length)return;const destination=(primary.textContent||'').split('→').pop().trim();primary.classList.add('next-stop');primary.textContent=`下一站导航 · ${destination}`;const more=document.createElement('details');more.className='route-more';const summary=document.createElement('summary');summary.textContent='查看完整路线';const allStops=document.createElement('div');allStops.className='route-all-stops';rest.forEach(node=>allStops.append(node));more.append(summary,allStops);routeLinks.replaceChildren(primary,more)});
     document.querySelectorAll('[data-close-map]').forEach(control=>control.addEventListener('click',closeMapSheet));
     window.addEventListener('keydown',event=>{if(event.key==='Escape')closeMapSheet()});
     document.querySelectorAll('.check').forEach(box=>{box.checked=localStorage.getItem(box.dataset.key)==='1';box.addEventListener('change',()=>localStorage.setItem(box.dataset.key,box.checked?'1':'0'))});
@@ -288,14 +302,16 @@ const requestDay=id=>{
   requestedDayId=id;
   setActiveDay(id);
   window.clearTimeout(releaseTimer);
-  document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
-  releaseTimer=window.setTimeout(releaseRequestedDay,950);
+  const target=document.getElementById(id);
+  const navHeight=dayNav?.getBoundingClientRect().height||0;
+  const targetTop=(target?.getBoundingClientRect().top||0)+window.scrollY-navHeight-8;
+  window.scrollTo({top:Math.max(0,targetTop),behavior:'smooth'});
+  releaseTimer=window.setTimeout(releaseRequestedDay,1800);
 };
 dayButtons.forEach(button=>button.addEventListener('click',()=>requestDay(button.dataset.target)));
 window.addEventListener('scroll',()=>{
   if(!scrollFrame)scrollFrame=requestAnimationFrame(()=>{scrollFrame=0;syncDayFromScroll()});
 },{passive:true});
-window.addEventListener('scrollend',releaseRequestedDay,{passive:true});
 syncDayFromScroll();
     const backTop=document.getElementById('backTop');
     window.addEventListener('scroll',()=>backTop.classList.toggle('is-visible',window.scrollY>620),{passive:true});
