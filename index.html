@@ -290,7 +290,8 @@ const syncDayFromScroll=()=>{
   if(requestedDayId)return;
   const threshold=(dayNav?.getBoundingClientRect().height||0)+26;
   let activeId=daySections[0]?.id;
-  daySections.forEach(section=>{if(section.getBoundingClientRect().top<=threshold)activeId=section.id});
+  let closestDistance=Infinity;
+  daySections.forEach(section=>{const distance=Math.abs(section.getBoundingClientRect().top-threshold);if(distance<closestDistance){closestDistance=distance;activeId=section.id}});
   if(activeId)setActiveDay(activeId);
 };
 const releaseRequestedDay=()=>{
