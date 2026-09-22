@@ -78,6 +78,7 @@
   /* 仅当前日期显示红色激活态，避免 D1 与当前天数同时高亮。 */
   .day-nav button:first-child{color:#8f8981!important;border-bottom-color:transparent!important}
   .day-nav button.is-active{color:var(--accent)!important;border-bottom-color:var(--accent)!important}
+  .location-detail{display:block;margin-top:5px;color:#877868;font-size:11px;line-height:1.55}.spot .location-detail{margin:0 0 7px}.meal .location-detail{margin-left:0}
 </style>
 </head>
 <body>
@@ -185,9 +186,44 @@
     const appleMapLink=document.getElementById('appleMapLink');
     const amapLink=document.getElementById('amapLink');
     const destinationAliases=[[/富润大厦/,'富润大厦，南昌市西湖区桂殿路666号'],[/中华南路488号/,'景德镇市珠山区中华南路488号'],[/陶阳里|龙珠阁/,'陶阳里历史文化旅游区，景德镇市珠山区珠山中路187号'],[/陶溪川/,'陶溪川文创街区，景德镇市珠山区新厂西路150号'],[/雕塑瓷厂/,'景德镇雕塑瓷厂，景德镇市珠山区新厂东路139号'],[/七中小肉/,'七中小肉，景德镇市珠山区浙江路'],[/谭婆/,'谭婆饺子粑，景德镇市珠山区'],[/三宝蓬/,'三宝蓬艺术聚落，景德镇市珠山区竟成镇三宝路'],[/瑶里/,'瑶里古镇，景德镇市浮梁县瑶里镇'],[/景德镇北/,'景德镇北站，景德镇市'],[/南昌南/,'南昌南站，南昌市'],[/南昌东/,'南昌东站，南昌市'],[/南昌西/,'南昌西站，南昌市'],[/珠宝街/,'珠宝街，南昌市西湖区'],[/万寿宫/,'万寿宫历史文化街区，南昌市西湖区'],[/八一广场/,'八一广场，南昌市东湖区'],[/江西省美术馆/,'江西省美术馆，南昌市东湖区'],[/滕王阁/,'滕王阁，南昌市东湖区'],[/绳金塔/,'绳金塔历史文化街区，南昌市西湖区']];
-    const destinationFromLink=link=>{try{const url=new URL(link.href);const copied=link.closest('.spot')?.querySelector('.copy')?.dataset.dest;const lastLabel=(link.textContent||'').split('→').pop().trim();const raw=copied||lastLabel||url.searchParams.get('q')||url.searchParams.get('daddr')||url.searchParams.get('ll')||'';return destinationAliases.find(([matcher])=>matcher.test(raw))?.[1]||raw}catch{return ''}};
+    const destinationFromLink=link=>{try{const url=new URL(link.href);const copied=link.dataset.destination||link.closest('.spot')?.querySelector('.copy')?.dataset.dest;const lastLabel=(link.textContent||'').split('→').pop().trim();const raw=copied||lastLabel||url.searchParams.get('q')||url.searchParams.get('daddr')||url.searchParams.get('ll')||'';return destinationAliases.find(([matcher])=>matcher.test(raw))?.[1]||raw}catch{return ''}};
     const closeMapSheet=()=>{mapSheet.classList.remove('is-open');mapSheet.setAttribute('aria-hidden','true');document.body.classList.remove('map-sheet-open')};
-    document.querySelectorAll('.map,.route-links a').forEach(link=>{if(link.classList.contains('map')){link.textContent='地图导航';link.setAttribute('aria-label','选择地图导航方式')}link.addEventListener('click',event=>{event.preventDefault();const destination=destinationFromLink(link);appleMapLink.href=`https://maps.apple.com/?q=${encodeURIComponent(destination)}`;amapLink.href=`https://uri.amap.com/search?keyword=${encodeURIComponent(destination)}&callnative=1`;mapSheet.classList.add('is-open');mapSheet.setAttribute('aria-hidden','false');document.body.classList.add('map-sheet-open')})});
+    const openMapChoice=(link,event)=>{event.preventDefault();const destination=destinationFromLink(link);appleMapLink.href=`https://maps.apple.com/?q=${encodeURIComponent(destination)}`;amapLink.href=`https://uri.amap.com/search?keyword=${encodeURIComponent(destination)}&callnative=1`;mapSheet.classList.add('is-open');mapSheet.setAttribute('aria-hidden','false');document.body.classList.add('map-sheet-open')};
+    const bindNavigation=links=>links.forEach(link=>{if(link.dataset.navigationBound)return;link.dataset.navigationBound='1';if(link.classList.contains('map')){link.textContent='地图导航';link.setAttribute('aria-label','选择地图导航方式')}link.addEventListener('click',event=>openMapChoice(link,event))});
+    bindNavigation(document.querySelectorAll('.map,.route-links a,.meal a'));
+    const spotDetails={
+      '万寿宫花墙':['万寿宫历史文化街区，南昌市西湖区','西湖区万寿宫历史文化街区内，幻师餐厅对面','地铁万寿宫站 1 号口出，步行约 3 分钟'],
+      '红墙 + 青石板路夜景':['万寿宫历史文化街区，南昌市西湖区','西湖区万寿宫历史文化街区','同花墙位置，晚上亮灯后拍摄'],
+      '八一广场纪念塔正面':['八一广场，南昌市东湖区','东湖区八一广场中轴线','地铁八一广场站，出站即到'],
+      '武商 MALL 7 楼空中花园':['武商MALL，南昌市东湖区广场北路29号','东湖区广场北路29号','商场电梯直达 7 楼，可俯瞰广场全景'],
+      '江西省美术馆旋转楼梯':['江西省美术馆，南昌市东湖区','东湖区八一广场南侧','与八一广场同一站，步行可达'],
+      '新洲文化广场看滕王阁':['新洲文化广场，南昌市东湖区沿江中大道18号','东湖区沿江中大道18号','打车至“新洲文化广场”，拍滕王阁全貌'],
+      '滕王阁北园红柱长廊':['滕王阁景区，南昌市东湖区仿古街58号','东湖区仿古街58号（滕王阁景区内）','购票进入景区，无需爬高'],
+      '绳金塔街区入口':['绳金塔历史文化街区，南昌市西湖区','西湖区绳金塔历史文化街区入口','地铁绳金塔站出站后步行约 5 分钟'],
+      '陶阳里红砖拱窑':['陶阳里御窑博物馆，景德镇市珠山区','珠山区陶阳里御窑博物馆内','从酒店打车“陶阳里御窑博物馆”，约 10 分钟'],
+      '碎瓷片框龙珠阁':['陶阳里御窑博物馆，景德镇市珠山区','珠山区陶阳里南门进门直走约100米','同到陶阳里御窑博物馆，进门后按指示牌'],
+      '陶阳里西围墙红墙':['陶阳里御窑博物馆，景德镇市珠山区','珠山区陶阳里御窑博物馆西侧','同上，馆内有指引'],
+      '陶溪川红砖厂房夜景':['陶溪川文创街区，景德镇市珠山区新厂西路351号','珠山区新厂西路351号陶溪川文创街区','从酒店打车“陶溪川”，约 8 分钟'],
+      '陶溪川窑与作建筑':['陶溪川文创街区，景德镇市珠山区新厂西路351号','珠山区陶溪川文创街区内','抵达陶溪川后街区内步行可达'],
+      '三宝蓬艺术空间':['三宝蓬艺术聚落，景德镇市珠山区三宝路','珠山区三宝路三宝蓬艺术聚落','打车“三宝蓬艺术聚落”，约 15 分钟车程'],
+      '雕塑瓷厂涂鸦墙':['景德镇雕塑瓷厂，景德镇市珠山区新厂东路139号','珠山区新厂东路139号雕塑瓷厂内','从酒店打车“雕塑瓷厂”，约 12 分钟'],
+      '雕塑瓷厂陶瓷小店':['景德镇雕塑瓷厂，景德镇市珠山区新厂东路139号','珠山区雕塑瓷厂作坊小院内','同到雕塑瓷厂，园区内步行逛'],
+      '瑶里木桥 + 瑶河':['瑶里古镇，景德镇市浮梁县瑶里镇','浮梁县瑶里古镇内','包车/打车约 1 小时，到古镇入口后步行进入'],
+      '瑶里鱼鳞坝':['瑶里古镇，景德镇市浮梁县瑶里镇','浮梁县瑶里古镇内','同木桥，古镇内步行可达'],
+      '瑶里古宅小巷':['瑶里古镇，景德镇市浮梁县瑶里镇','浮梁县瑶里古镇内','包车/打车约 1 小时，到古镇入口后步行进入']
+    };
+    document.querySelectorAll('.spot').forEach(card=>{const title=card.querySelector('h3')?.textContent.trim();const detail=spotDetails[title];if(!detail)return;const [destination,address,arrival]=detail;const addressNode=card.querySelector('.address');addressNode.textContent=`📍 ${address}`;const arrivalNode=document.createElement('small');arrivalNode.className='location-detail';arrivalNode.textContent=`怎么到：${arrival}`;addressNode.after(arrivalNode);const copy=card.querySelector('.copy');if(copy)copy.dataset.dest=destination});
+    const mealDetails=[
+      ['打平伙',{label:'A｜打平伙·鲜鲜小炒',destination:'打平伙·鲜鲜小炒，南昌市西湖区船山路639号',detail:'📍 西湖区船山路639号万寿宫 B1/B2 栋 · 国庆建议提前美团取号'}],['南昌饭店',{label:'B｜南昌饭店',destination:'南昌饭店，南昌市西湖区万寿宫历史文化街区',detail:'📍 西湖区万寿宫历史文化街区西 1 门旁 · 同区域步行即达'}],['珠宝街小吃',{label:'C｜珠宝街小吃街',destination:'珠宝街小吃街，南昌市西湖区',detail:'📍 西湖区珠宝街（万寿宫隔壁） · 步行约 3 分钟'}],
+      ['小罗子',{label:'早餐 A｜小罗子汤店（总店）',destination:'小罗子汤店大士院总店，南昌市东湖区',detail:'📍 东湖区大士院南区23栋 · 打车“小罗子汤店大士院总店”'}],['锦红',{label:'早餐 B｜锦红小吃',destination:'锦红小吃，南昌市东湖区大士院',detail:'📍 东湖区大士院内 · 从小罗子步行约 2 分钟'}],['龙老五',{label:'晚餐 A｜龙老五汤店',destination:'龙老五汤店，南昌市西湖区站前西路203号',detail:'📍 西湖区站前西路203号 · 认准“绳金塔龙老五”，避免同名店'}],['德记',{label:'晚餐 B｜德记潮汕海鲜牛肉火锅',destination:'德记潮汕牛肉火锅绳金塔店，南昌市西湖区',detail:'📍 西湖区绳金塔附近 · 打车“德记潮汕牛肉火锅绳金塔店”'}],
+      ['泥上',{label:'午餐 A｜泥上风土（陶博店）',destination:'泥上风土自然餐厅陶博店，景德镇市昌江区珠山大道997号',detail:'📍 昌江区珠山大道997号 · 打车“泥上风土自然餐厅陶博店”'}],['众诚',{label:'午餐 B｜众诚田耕季',destination:'众诚田耕季陶溪川总店，景德镇市珠山区新厂西路351号',detail:'📍 珠山区新厂西路351号陶溪川总店 · 街区内可达'}],['味烧烤',{label:'晚餐 A｜味烧烤（陶阳新村店）',destination:'味烧烤陶阳新村店，景德镇市珠山区陶艺南路902号',detail:'📍 珠山区陶艺南路902号 · 打车“味烧烤陶阳新村店”'}],['回家吃饭',{label:'晚餐 B｜回家吃饭',destination:'回家吃饭，景德镇市珠山区陶溪川文创街区',detail:'📍 珠山区陶溪川文创街区内 · 下午 4:30 放号，建议提前排'}],
+      ['公园第一家',{label:'早餐 A｜公园第一家包子',destination:'公园第一家包子，景德镇市珠山区中华南路',detail:'📍 珠山区中华南路附近 · 从住宿步行可达'}],['七中小肉',{label:'午餐 A｜七中小肉（浙江商城店）',destination:'七中小肉浙江商城店，景德镇市珠山区浙江商城西门口5栋11号',detail:'📍 珠山区浙江商城西门口5栋11号 · 打车“七中小肉浙江商城店”'}],['老屋里',{label:'午餐 B｜老屋里·乡野江西菜',destination:'老屋里乡野江西菜，景德镇市珠山区雕塑瓷厂北门',detail:'📍 珠山区雕塑瓷厂北门旁 · 园区步行即达'}],['谭婆',{label:'晚餐 A｜谭婆饺子粑 + 陶姐冷粉',destination:'谭婆饺子粑，景德镇市珠山区',detail:'📍 珠山区陶溪川附近 · 出发前确认营业'}],
+      ['小毛',{label:'早餐 A｜小毛老面汤包（总店）',destination:'小毛老面汤包中山南路店，景德镇市珠山区中山南路226号',detail:'📍 珠山区中山南路226号 · 打车“小毛老面汤包中山南路”'}],['铁闸',{label:'早餐 B｜铁闸早餐店',destination:'铁闸早餐店，景德镇市珠山区',detail:'📍 珠山区 · 打车“铁闸早餐店景德镇”'}],['竹影',{label:'瑶里午餐 A｜竹影栖院餐厅',destination:'竹影栖院餐厅，景德镇市浮梁县瑶里古镇',detail:'📍 浮梁县瑶里古镇东南门附近 · 到瑶里后步行进入'}]
+    ];
+    document.querySelectorAll('.meal a').forEach(anchor=>{const item=mealDetails.find(([key])=>anchor.textContent.includes(key));if(!item)return;const [,data]=item;anchor.textContent=data.label;anchor.dataset.destination=data.destination;const detail=document.createElement('small');detail.className='location-detail';detail.textContent=data.detail;anchor.closest('li').append(detail)});
+    const extraMeals={day3:[['午餐 C｜图味美小黄鱼','图味美小黄鱼，景德镇市珠山区陶溪川文创街区','📍 珠山区陶溪川文创街区内 · 国庆建议提前线上取号'],['晚餐 C｜欧记大排档','欧记大排档，景德镇市珠山区陶溪川文创街区','📍 珠山区陶溪川文创街区内 · 与周边备选步行可达']],day4:[['早餐 B｜诚信油条','诚信油条，景德镇市珠山区中华南路','📍 珠山区中华南路 · 从住宿步行可达'],['午餐 C｜绿川面馆','绿川面馆，景德镇市珠山区雕塑瓷厂','📍 珠山区雕塑瓷厂附近 · 园区周边步行可达'],['晚餐 B｜眼镜粑店','眼镜粑店，景德镇市珠山区陶溪川','📍 珠山区陶溪川对面 · 从雕塑瓷厂打车约 5 分钟'],['晚餐 C｜彭俊林粑店','彭俊林粑店，景德镇市珠山区陶溪川','📍 珠山区陶溪川旁 · 从雕塑瓷厂打车约 5 分钟']],day5:[['瑶里午餐 B｜一步岭土鸡土家菜','一步岭土鸡土家菜，景德镇市浮梁县瑶里古镇红军桥','📍 浮梁县瑶里古镇红军桥旁 · 到瑶里后步行可达']]};
+    Object.entries(extraMeals).forEach(([dayId,items])=>{const list=document.querySelector(`#${dayId} .meal`);if(!list)return;items.forEach(([label,destination,detail])=>{const li=document.createElement('li');const anchor=document.createElement('a');anchor.href=`https://maps.apple.com/?q=${encodeURIComponent(destination)}`;anchor.dataset.destination=destination;anchor.textContent=label;const note=document.createElement('small');note.className='location-detail';note.textContent=detail;li.append(anchor,note);list.append(li)})});
+    bindNavigation(document.querySelectorAll('.meal a'));
     document.querySelectorAll('[data-close-map]').forEach(control=>control.addEventListener('click',closeMapSheet));
     window.addEventListener('keydown',event=>{if(event.key==='Escape')closeMapSheet()});
     document.querySelectorAll('.check').forEach(box=>{box.checked=localStorage.getItem(box.dataset.key)==='1';box.addEventListener('change',()=>localStorage.setItem(box.dataset.key,box.checked?'1':'0'))});
