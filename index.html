@@ -201,9 +201,32 @@
     const appleMapLink=document.getElementById('appleMapLink');
     const amapLink=document.getElementById('amapLink');
     const destinationAliases=[[/富润大厦/,'富润大厦，南昌市西湖区桂殿路666号'],[/中华南路488号/,'景德镇市珠山区中华南路488号'],[/陶阳里|龙珠阁/,'陶阳里历史文化旅游区，景德镇市珠山区珠山中路187号'],[/陶溪川/,'陶溪川文创街区，景德镇市珠山区新厂西路150号'],[/雕塑瓷厂/,'景德镇雕塑瓷厂，景德镇市珠山区新厂东路139号'],[/七中小肉/,'七中小肉，景德镇市珠山区浙江路'],[/谭婆/,'谭婆饺子粑，景德镇市珠山区'],[/三宝蓬/,'三宝蓬艺术聚落，景德镇市珠山区竟成镇三宝路'],[/瑶里/,'瑶里古镇，景德镇市浮梁县瑶里镇'],[/景德镇北/,'景德镇北站，景德镇市'],[/南昌南/,'南昌南站，南昌市'],[/南昌东/,'南昌东站，南昌市'],[/南昌西/,'南昌西站，南昌市'],[/珠宝街/,'珠宝街，南昌市西湖区'],[/万寿宫/,'万寿宫历史文化街区，南昌市西湖区'],[/八一广场/,'八一广场，南昌市东湖区'],[/江西省美术馆/,'江西省美术馆，南昌市东湖区'],[/滕王阁/,'滕王阁，南昌市东湖区'],[/绳金塔/,'绳金塔历史文化街区，南昌市西湖区']];
+    // 高德对“景点名，城市，行政区”这类整串关键词并不总是做分词匹配；传入规范 POI 名称并单独指定城市，才能稳定直达正确结果。
+    const amapSearchAliases=[
+      [/富润大厦|桂殿路666号/,{keyword:'全季南昌朝阳新城酒店',city:'南昌'}],
+      [/中华南路488号/,{keyword:'你好酒店(景德镇人民广场陶阳里店)',city:'景德镇'}],
+      [/万寿宫/,{keyword:'万寿宫历史文化街区',city:'南昌'}],
+      [/珠宝街/,{keyword:'珠宝街',city:'南昌'}],
+      [/八一广场/,{keyword:'八一广场',city:'南昌'}],
+      [/武商/,{keyword:'武商MALL',city:'南昌'}],
+      [/江西省美术馆/,{keyword:'江西省美术馆',city:'南昌'}],
+      [/新洲/,{keyword:'新洲文化广场',city:'南昌'}],
+      [/滕王阁/,{keyword:'滕王阁旅游区',city:'南昌'}],
+      [/绳金塔/,{keyword:'绳金塔历史文化街区',city:'南昌'}],
+      [/陶阳里|龙珠阁/,{keyword:'景德镇陶阳里历史文化旅游区',city:'景德镇'}],
+      [/陶溪川/,{keyword:'陶溪川文创街区',city:'景德镇'}],
+      [/雕塑瓷厂/,{keyword:'景德镇雕塑瓷厂',city:'景德镇'}],
+      [/三宝蓬/,{keyword:'三宝蓬艺术聚落',city:'景德镇'}],
+      [/瑶里/,{keyword:'瑶里古镇',city:'景德镇'}],
+      [/景德镇北/,{keyword:'景德镇北站',city:'景德镇'}],
+      [/南昌南/,{keyword:'南昌南站',city:'南昌'}],
+      [/南昌东/,{keyword:'南昌东站',city:'南昌'}],
+      [/南昌西/,{keyword:'南昌西站',city:'南昌'}]
+    ];
     const destinationFromLink=link=>{try{const url=new URL(link.href);const copied=link.dataset.destination||link.closest('.spot')?.querySelector('.copy')?.dataset.dest;const lastLabel=(link.textContent||'').split('→').pop().trim();const raw=copied||lastLabel||url.searchParams.get('q')||url.searchParams.get('daddr')||url.searchParams.get('ll')||'';return destinationAliases.find(([matcher])=>matcher.test(raw))?.[1]||raw}catch{return ''}};
     const closeMapSheet=()=>{mapSheet.classList.remove('is-open');mapSheet.setAttribute('aria-hidden','true');document.body.classList.remove('map-sheet-open')};
-    const openMapChoice=(link,event)=>{event.preventDefault();const destination=destinationFromLink(link);appleMapLink.href=`https://maps.apple.com/?q=${encodeURIComponent(destination)}`;amapLink.href=`https://uri.amap.com/search?keyword=${encodeURIComponent(destination)}&callnative=1`;mapSheet.classList.add('is-open');mapSheet.setAttribute('aria-hidden','false');document.body.classList.add('map-sheet-open')};
+    const amapUrlFor=destination=>{const match=amapSearchAliases.find(([matcher])=>matcher.test(destination));const {keyword,city}=match?.[1]||{keyword:destination,city:''};return `https://uri.amap.com/search?keyword=${encodeURIComponent(keyword)}${city?`&city=${encodeURIComponent(city)}`:''}&callnative=1`};
+    const openMapChoice=(link,event)=>{event.preventDefault();const destination=destinationFromLink(link);appleMapLink.href=`https://maps.apple.com/?q=${encodeURIComponent(destination)}`;amapLink.href=amapUrlFor(destination);mapSheet.classList.add('is-open');mapSheet.setAttribute('aria-hidden','false');document.body.classList.add('map-sheet-open')};
     const bindNavigation=links=>links.forEach(link=>{if(link.dataset.navigationBound)return;link.dataset.navigationBound='1';if(link.classList.contains('map')){link.textContent='地图导航';link.setAttribute('aria-label','选择地图导航方式')}link.addEventListener('click',event=>openMapChoice(link,event))});
     bindNavigation(document.querySelectorAll('.map,.route-links a,.meal a'));
     const spotDetails={
